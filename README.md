@@ -1,1 +1,1 @@
-# STAJ22001 ders kodlu yaz stajı dosyası
+# STAJ22001 ders kodlu yaz stajı dosyası.
