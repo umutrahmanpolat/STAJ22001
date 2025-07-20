@@ -1,0 +1,22 @@
+<div class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-light w-100 p-0 m-0 header-navbar">
+    <div class="container-fluid px-0 d-flex align-items-center justify-content-between">
+      <!-- Sol: Logo -->
+      <span class="navbar-brand mb-0 h1 ms-3">
+        <img src="assets/unnamed.png" alt="Logo" style="height:48px;">
+      </span>
+      <!-- Orta: Başlık -->
+      <span class="header-title mx-auto">
+        CV Oluşturma Formu
+      </span>
+      <!-- Sağ: Çıkış -->
+      <button *ngIf="isLoggedIn()" class="button btn me-3" (click)="logout()">
+        Çıkış Yap
+      </button>
+    </div>
+  </nav>
+  <main class="flex-grow-1">
+    <router-outlet></router-outlet>
+  </main>
+  <app-footer></app-footer>
+</div>
