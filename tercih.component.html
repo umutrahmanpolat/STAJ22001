@@ -1,0 +1,26 @@
+<style>
+  .btn{
+    background-color: rgb(255, 208, 0);
+  }
+</style>
+
+<div class="mb-3">
+  <label for="il" class="form-label">Çalışmak İstediği İl</label>
+  <select id="il" class="form-select" [(ngModel)]="form.calismak_istedigi_il" (ngModelChange)="ilSecildi($event)">
+    <option [ngValue]="null">Seçiniz</option>
+    <option *ngFor="let il of iller" [ngValue]="il.id">{{ il.ad }}</option>
+  </select>
+</div>
+<div class="mb-3">
+  <label for="ilce" class="form-label">Çalışmak İstediği İlçe</label>
+  <select id="ilce" class="form-select" [(ngModel)]="form.calismak_istedigi_ilce" [disabled]="!ilceler.length">
+    <option [ngValue]="null">Seçiniz</option>
+    <option *ngFor="let ilce of ilceler" [ngValue]="ilce.id">{{ ilce.ad }}</option>
+  </select>
+</div>
+<div *ngIf="kayitHatasi" class="alert alert-danger">{{ kayitHatasi }}</div>
+<div *ngIf="kayitBasarili" class="alert alert-success">Tercih kaydedildi.</div>
+<div class="d-flex gap-2 justify-content-end mt-3">
+  <button class="btn " type="button" (click)="prev()">Geri</button>
+  <button class="btn " type="button" (click)="next()">İleri</button>
+</div>

@@ -1,0 +1,35 @@
+<style>
+  .btn{
+    background-color: rgb(255, 208, 0);
+  }
+</style>
+
+<h4>Yetkinlikler</h4>
+<form (ngSubmit)="next()">
+  <div *ngFor="let yetkinlik of form; let i=index" class="row border-bottom mb-3 pb-2">
+    <div class="col-md-6 mb-3">
+      <label>Yetkinlik Adı</label>
+      <input class="form-control" [(ngModel)]="yetkinlik.yetkinlik_adi" name="yetkinlik_adi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Yetkinlik Açıklaması</label>
+      <input class="form-control" [(ngModel)]="yetkinlik.yetkinlik_aciklamasi" name="yetkinlik_aciklamasi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Yetkinlik Tipi</label>
+      <input class="form-control" [(ngModel)]="yetkinlik.yetkinlik_tipi" name="yetkinlik_tipi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-12">
+      <button type="button" *ngIf="form.length > 1" class="btn  btn-sm mb-2" (click)="form.splice(i,1); formChange.emit(form)">Sil</button>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="btn  btn-sm" (click)="form.push({}); formChange.emit(form)">Ekle</button>
+  </div>
+  <div class="mt-4 d-flex justify-content-between">
+    <button type="button" class="btn " (click)="prev()">Geri</button>
+    <button type="submit" class="btn ">İleri</button>
+  </div>
+  <div *ngIf="hata" class="alert alert-danger mt-2">{{ hata }}</div>
+  <div *ngIf="basarili" class="alert alert-success mt-2">Yetkinlik başarıyla kaydedildi!</div>
+</form>

@@ -1,0 +1,200 @@
+<style>
+  .list-group{
+    background-color: white;
+  }
+  .btn{
+    background-color: rgb(255, 208, 0);
+  }
+  
+</style>
+
+<div class="container mt-4 mb-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item" *ngFor="let tab of tabs; let i = index">
+              <a class="nav-link" [class.active]="selectedTab === i" (click)="selectTab(i)">
+                {{ tab.label }}
+              </a>
+            </li>
+          </ul>
+
+          <div class="tab-content mt-3">
+            <ng-container [ngSwitch]="selectedTab">
+              <div *ngSwitchCase="0">
+                <app-aday
+                  [form]="cvForm.aday"
+                  (formChange)="cvForm.aday = $event"
+                  (ileri)="nextTab()"
+                  (geri)="prevTab()"
+                  standalone
+                ></app-aday>
+              </div>
+              <div *ngSwitchCase="1">
+                <app-egitim
+                  [form]="cvForm.egitim"
+                  (formChange)="cvForm.egitim = $event"
+                  (ileri)="nextTab()"
+                  (geri)="prevTab()"
+                  standalone
+                ></app-egitim>
+              </div>
+              <div *ngSwitchCase="2">
+                <app-is-deneyim
+                  [form]="cvForm.isDeneyim"
+                  (formChange)="cvForm.isDeneyim = $event"
+                  (ileri)="nextTab()"
+                  (geri)="prevTab()"
+                  standalone
+                ></app-is-deneyim>
+              </div>
+              <div *ngSwitchCase="3">
+                <app-yetkinlik
+                  [form]="cvForm.yetkinlik"
+                  (formChange)="cvForm.yetkinlik = $event"
+                  (ileri)="nextTab()"
+                  (geri)="prevTab()"
+                  standalone
+                ></app-yetkinlik>
+              </div>
+              <div *ngSwitchCase="4">
+                <app-sosyal
+                  [form]="cvForm.sosyal"
+                  (formChange)="cvForm.sosyal = $event"
+                  (ileri)="nextTab()"
+                  (geri)="prevTab()"
+                  standalone
+                ></app-sosyal>
+              </div>
+              <div *ngSwitchCase="5">
+                <app-referans
+                  [form]="cvForm.referans"
+                  (formChange)="cvForm.referans = $event"
+                  (ileri)="nextTab()"
+                  (geri)="prevTab()"
+                  standalone
+                ></app-referans>
+              </div>
+              <div *ngSwitchCase="6">
+                <app-tercih
+                  [form]="cvForm.tercih"
+                  (formChange)="cvForm.tercih = $event"
+                  (ileri)="nextTab()"
+                  (geri)="prevTab()"
+                  standalone
+                ></app-tercih>
+              </div>
+              <div *ngSwitchCase="7">
+                <app-ozet
+                  [form]="cvForm.ozet"
+                  (formChange)="cvForm.ozet = $event"
+                  standalone
+                ></app-ozet>
+                <div class="d-flex gap-2 mt-3">
+                  <button class="btn " (click)="kaydetVeGoruntule()">CV’yi Kaydet ve Görüntüle</button>
+                </div>
+
+                <div *ngIf="showCv" class="mt-4">
+                  
+                  <div class="card p-4 shadow-sm mb-4">
+                    <div class="row">
+                      
+                      <div class="col-md-4 text-center">
+                        <img [src]="cvForm.aday?.fotograf || 'https://via.placeholder.com/150'"
+                             class="rounded mb-3" width="120" height="120" alt="Fotoğraf">
+                        <h4 class="mb-3">Kişisel Bilgiler</h4>
+                        <ul class="list-group list-group-flush text-start mb-3">
+                          <li class="list-group-item py-1"><strong>Ad:</strong> {{cvForm.aday?.ad}}</li>
+                          <li class="list-group-item py-1"><strong>Soyad:</strong> {{cvForm.aday?.soyad}}</li>
+                          <li class="list-group-item py-1"><strong>E-posta:</strong> {{cvForm.aday?.e_posta}}</li>
+                          <li class="list-group-item py-1"><strong>Telefon:</strong> {{cvForm.aday?.telefon}}</li>
+                          <li class="list-group-item py-1"><strong>TC Kimlik No:</strong> {{cvForm.aday?.tc_no}}</li>
+                          <li class="list-group-item py-1"><strong>Medeni Durum:</strong> {{cvForm.aday?.medeni_durum}}</li>
+                          <li class="list-group-item py-1"><strong>Cinsiyet:</strong> {{cvForm.aday?.cinsiyet}}</li>
+                          <li class="list-group-item py-1"><strong>Doğum Tarihi:</strong> {{cvForm.aday?.dogum_tarihi}}</li>
+                          <li class="list-group-item py-1"><strong>Doğum Yılı:</strong> {{cvForm.aday?.dogum_yili}}</li>
+                          <li class="list-group-item py-1"><strong>İl:</strong> {{cvForm.aday?.il}}</li>
+                          <li class="list-group-item py-1"><strong>İlçe:</strong> {{cvForm.aday?.ilce}}</li>
+                          <li class="list-group-item py-1"><strong>Eğitim Düzeyi:</strong> {{cvForm.aday?.egitim_duzeyi}}</li>
+                          <li class="list-group-item py-1"><strong>Askerlik:</strong> {{cvForm.aday?.askerlik}}</li>
+                          <li class="list-group-item py-1"><strong>Askerlik Açıklama:</strong> {{cvForm.aday?.askerlik_aciklama}}</li>
+                          <li class="list-group-item py-1"><strong>Askerlik Tarihi:</strong> {{cvForm.aday?.askerlik_tarihi}}</li>
+                        </ul>
+                      </div>
+                      
+                      <div class="col-md-8">
+                        <h5 class="text mb-3"><i class="bi bi-person-vcard"></i> Özet</h5>
+                        <blockquote class="blockquote bg-light rounded p-3 border-start border-3 border-rgb(255, 208, 0)">
+                          <span class="fw-bold">Özet:</span>
+                          <p class="mb-0" style="white-space: pre-line;">{{cvForm.ozet?.ozet}}</p>
+                        </blockquote>
+
+                       
+                        <h6 class="mt-4 text-secondary"><i class="bi bi-mortarboard"></i> Eğitim Bilgileri</h6>
+                        <div *ngFor="let egitim of cvForm.egitim" class="mb-2">
+                          <div *ngIf="egitim.lise_adi"><strong>Lise Adı:</strong> {{egitim.lise_adi}}</div>
+                          <div *ngIf="egitim.universite_adi"><strong>Üniversite Adı:</strong> {{egitim.universite_adi}}</div>
+                          <div *ngIf="egitim.bolum_adi"><strong>Bölüm Adı:</strong> {{egitim.bolum_adi}}</div>
+                          <div *ngIf="egitim.egitim_tipi"><strong>Eğitim Tipi:</strong> {{egitim.egitim_tipi}}</div>
+                          <div *ngIf="egitim.mezuniyet_tarihi"><strong>Mezuniyet Tarihi:</strong> {{egitim.mezuniyet_tarihi}}</div>
+                        </div>
+
+                       
+                        <h6 class="mt-4 text-secondary"><i class="bi bi-briefcase"></i> İş Deneyimi</h6>
+                        <div *ngFor="let deneyim of cvForm.isDeneyim" class="mb-2">
+                          <div *ngIf="deneyim.isyeri_adi"><strong>İşyeri Adı:</strong> {{deneyim.isyeri_adi}}</div>
+                          <div *ngIf="deneyim.pozisyon"><strong>Pozisyon:</strong> {{deneyim.pozisyon}}</div>
+                          <div *ngIf="deneyim.sektor"><strong>Sektör:</strong> {{deneyim.sektor}}</div>
+                          <div *ngIf="deneyim.giris_tarihi"><strong>Giriş Tarihi:</strong> {{deneyim.giris_tarihi}}</div>
+                          <div *ngIf="deneyim.cikis_tarihi"><strong>Çıkış Tarihi:</strong> {{deneyim.cikis_tarihi}}</div>
+                        </div>
+
+                      
+                        <h6 class="mt-4 text-secondary"><i class="bi bi-lightbulb"></i> Yetkinlikler</h6>
+                        <div *ngFor="let yetkinlik of cvForm.yetkinlik" class="mb-2">
+                          <div *ngIf="yetkinlik.yetkinlik_adi"><strong>Yetkinlik Adı:</strong> {{yetkinlik.yetkinlik_adi}}</div>
+                          <div *ngIf="yetkinlik.yetkinlik_aciklamasi"><strong>Yetkinlik Açıklaması:</strong> {{yetkinlik.yetkinlik_aciklamasi}}</div>
+                          <div *ngIf="yetkinlik.yetkinlik_tipi"><strong>Yetkinlik Tipi:</strong> {{yetkinlik.yetkinlik_tipi}}</div>
+                        </div>
+
+                      
+                        <h6 class="mt-4 text-secondary"><i class="bi bi-people"></i> Sosyal Bilgiler</h6>
+                        <div *ngFor="let sosyal of cvForm.sosyal" class="mb-2">
+                          <div *ngIf="sosyal.hobiler"><strong>Hobiler:</strong> {{sosyal.hobiler}}</div>
+                          <div *ngIf="sosyal.uye_oldugu_topluluklar"><strong>Üye Olduğu Topluluklar:</strong> {{sosyal.uye_oldugu_topluluklar}}</div>
+                          <div *ngIf="sosyal.sosyal_faaliyetler"><strong>Sosyal Faaliyetler:</strong> {{sosyal.sosyal_faaliyetler}}</div>
+                        </div>
+
+                        
+                        <h6 class="mt-4 text-secondary"><i class="bi bi-person-check"></i> Referanslar</h6>
+                        <div *ngFor="let ref of cvForm.referans" class="mb-2">
+                          <div *ngIf="ref.referans_ad"><strong>Ad:</strong> {{ref.referans_ad}}</div>
+                          <div *ngIf="ref.referans_soyad"><strong>Soyad:</strong> {{ref.referans_soyad}}</div>
+                          <div *ngIf="ref.unvan"><strong>Ünvan:</strong> {{ref.unvan}}</div>
+                          <div *ngIf="ref.referans_telefon"><strong>Telefon:</strong> {{ref.referans_telefon}}</div>
+                          <div *ngIf="ref.gorev_veri"><strong>Görev/Veri:</strong> {{ref.gorev_veri}}</div>
+                        </div>
+
+                       
+                        <h6 class="mt-4 text-secondary"><i class="bi bi-geo-alt"></i> Tercih Bilgileri</h6>
+                        <div>
+                          <div *ngIf="cvForm.tercih?.calismak_istedigi_il"><strong>Çalışmak İstediği Şehir:</strong> {{cvForm.tercih.calismak_istedigi_il}}</div>
+                          <div *ngIf="cvForm.tercih?.calismak_istedigi_ilce"><strong>Çalışmak İstediği İlçe:</strong> {{cvForm.tercih.calismak_istedigi_ilce}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="kayitBasarili" class="alert alert-success mt-2">CV başarıyla kaydedildi!</div>
+                <div *ngIf="kayitHatasi" class="alert alert-danger mt-2">{{kayitHatasi}}</div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<style>
+  .btn{
+    background-color: rgb(255, 208, 0);
+  }
+</style>
+
+<h4>Referans Bilgileri</h4>
+<form (ngSubmit)="next()">
+  <div *ngFor="let referans of form; let i=index" class="row border-bottom mb-3 pb-2">
+    <div class="col-md-6 mb-3">
+      <label>Ad</label>
+      <input class="form-control" [(ngModel)]="referans.referans_ad" name="referans_ad{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Soyad</label>
+      <input class="form-control" [(ngModel)]="referans.referans_soyad" name="referans_soyad{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Ünvan</label>
+      <input class="form-control" [(ngModel)]="referans.unvan" name="unvan{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Telefon</label>
+      <input class="form-control" [(ngModel)]="referans.referans_telefon" name="referans_telefon{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Görev</label>
+      <input class="form-control" [(ngModel)]="referans.gorev_veri" name="gorev_veri{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-12">
+      <button type="button" *ngIf="form.length > 1" class="btn " (click)="form.splice(i,1); formChange.emit(form)">Sil</button>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="btn  btn-sm" (click)="form.push({}); formChange.emit(form)">Ekle</button>
+  </div>
+  <div class="mt-4 d-flex justify-content-between">
+    <button type="button" class="btn " (click)="prev()">Geri</button>
+    <button type="submit" class="btn ">İleri</button>
+  </div>
+  <div *ngIf="hata" class="alert alert-danger mt-2">{{ hata }}</div>
+  <div *ngIf="basarili" class="alert alert-success mt-2">Referans başarıyla kaydedildi!</div>
+</form>

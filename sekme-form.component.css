@@ -1,0 +1,18 @@
+.tabs { 
+     display: flex;
+     gap: 8px; 
+     margin-bottom: 16px;
+}
+
+.tabs button { 
+    padding: 8px 16px; 
+    border: none; border-bottom: 
+    2px solid transparent; 
+    background: none; 
+    cursor: pointer; 
+}
+
+.tabs button.active {
+     font-weight: bold;
+     border-bottom: 2px solid #0059ff;
+}

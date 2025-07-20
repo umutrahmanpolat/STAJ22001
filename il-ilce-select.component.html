@@ -1,0 +1,16 @@
+<div class="row mb-3">
+  <div class="col">
+    <label>İl:</label>
+    <select class="form-control" [value]="ilId" (change)="onIlChange($event)">
+      <option value="">Seçiniz</option>
+      <option *ngFor="let il of iller" [value]="il.id">{{ il.ad }}</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>İlçe:</label>
+    <select class="form-control" [value]="ilceId" (change)="onIlceChange($event)">
+      <option value="">Seçiniz</option>
+      <option *ngFor="let ilce of ilceler" [value]="ilce.id">{{ ilce.ad }}</option>
+    </select>
+  </div>
+</div>

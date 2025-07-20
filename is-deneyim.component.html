@@ -1,0 +1,43 @@
+<style>
+  .btn{
+    background-color: rgb(255, 208, 0);
+  }
+</style>
+
+<h4>İş Deneyimi</h4>
+<form (ngSubmit)="next()">
+  <div *ngFor="let deneyim of form; let i=index" class="row border-bottom mb-3 pb-2">
+    <div class="col-md-6 mb-3">
+      <label>İşyeri Adı</label>
+      <input class="form-control" [(ngModel)]="deneyim.isyeri_adi" name="isyeri_adi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Pozisyon</label>
+      <input class="form-control" [(ngModel)]="deneyim.pozisyon" name="pozisyon{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Sektör</label>
+      <input class="form-control" [(ngModel)]="deneyim.sektor" name="sektor{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Giriş Tarihi</label>
+      <input type="date" class="form-control" [(ngModel)]="deneyim.giris_tarihi" name="giris_tarihi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Çıkış Tarihi</label>
+      <input type="date" class="form-control" [(ngModel)]="deneyim.cikis_tarihi" name="cikis_tarihi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-12">
+      <button type="button" *ngIf="form.length > 1" class="btn " (click)="form.splice(i,1); formChange.emit(form)">Sil</button>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="btn " (click)="form.push({}); formChange.emit(form)">Ekle</button>
+  </div>
+  <div class="mt-4 d-flex justify-content-between">
+    <button type="button" class="btn " (click)="prev()">Geri</button>
+    <button type="submit" class="btn ">İleri</button>
+  </div>
+  <div *ngIf="hata" class="alert alert-danger mt-2">{{ hata }}</div>
+  <div *ngIf="basarili" class="alert alert-success mt-2">İş Deneyimi başarıyla kaydedildi!</div>
+</form>

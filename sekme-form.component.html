@@ -1,0 +1,26 @@
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item" *ngFor="let sekme of sekmeler">
+    <a class="nav-link" [class.active]="aktif === sekme.id" (click)="setAktif(sekme.id)">{{ sekme.ad }}</a>
+  </li>
+</ul>
+
+<div [ngSwitch]="aktif">
+  <div *ngSwitchCase="'kisisel'">
+    <label>Ad Soyad:</label>
+    <input class="form-control" [(ngModel)]="form.kisisel.adsoyad">
+  </div>
+
+  <div *ngSwitchCase="'adres'">
+    <label>Adres:</label>
+    <input class="form-control" [(ngModel)]="form.adres.adres">
+  </div>
+
+  <div *ngSwitchCase="'calisma'">
+    <app-il-ilce-select
+  [ilId]="form.calisma.il_id"
+  [ilceId]="form.calisma.ilce_id"
+  (ilIdChange)="form.calisma.il_id = $event"
+  (ilceIdChange)="form.calisma.ilce_id = $event"
+></app-il-ilce-select>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<style>
+  .btn{
+    background-color: rgb(255, 208, 0);
+  }
+</style>
+
+<h4>Eğitim Bilgileri</h4>
+<form (ngSubmit)="next()">
+  <div *ngFor="let egitim of form; let i = index" class="row">
+    <div class="col-md-6 mb-3">
+      <label>Eğitim Tipi</label>
+      <input class="form-control" [(ngModel)]="egitim.egitim_tipi" name="egitim_tipi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Mezuniyet Tarihi</label>
+      <input type="date" class="form-control" [(ngModel)]="egitim.mezuniyet_tarihi" name="mezuniyet_tarihi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Üniversite Adı</label>
+      <input class="form-control" [(ngModel)]="egitim.universite_adi" name="universite_adi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Bölüm Adı</label>
+      <input class="form-control" [(ngModel)]="egitim.bolum_adi" name="bolum_adi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Lise Adı</label>
+      <input class="form-control" [(ngModel)]="egitim.lise_adi" name="lise_adi{{i}}" (ngModelChange)="formChange.emit(form)">
+    </div>
+    <div class="col-md-12 mb-4">
+      <button type="button" class="btn " *ngIf="form.length > 1" (click)="form.splice(i,1); formChange.emit(form)">Sil</button>
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="button" class="btn  btn-sm" (click)="form.push({}); formChange.emit(form)">Yeni Eğitim Ekle</button>
+  </div>
+  <div class="mt-4 d-flex justify-content-between">
+    <button type="button" class="btn " (click)="prev()">Geri</button>
+    <button type="submit" class="btn ">İleri</button>
+  </div>
+  <div *ngIf="hata" class="alert alert-danger mt-2">{{ hata }}</div>
+  <div *ngIf="basarili" class="alert alert-success mt-2">Eğitim başarıyla kaydedildi!</div>
+</form>

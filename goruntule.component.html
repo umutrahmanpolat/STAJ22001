@@ -1,0 +1,30 @@
+<style>
+  .btn{
+    background-color: rgb(255, 208, 0);
+  }
+  
+</style>
+
+<div class="baslik" *ngIf="cv; else loading">
+  <h4>Aday Bilgileri</h4>
+  <pre>{{ cv.aday | json }}</pre>
+  <h4>Eğitim</h4>
+  <pre>{{ cv.egitim | json }}</pre>
+  <h4>İş Deneyimi</h4>
+  <pre>{{ cv.is_deneyim | json }}</pre>
+  <h4>Yetkinlik</h4>
+  <pre>{{ cv.yetkinlik | json }}</pre>
+  <h4>Sosyal</h4>
+  <pre>{{ cv.sosyal | json }}</pre>
+  <h4>Referans</h4>
+  <pre>{{ cv.referans | json }}</pre>
+  <h4>İş Tercihi</h4>
+  <pre>{{ cv.tercih | json }}</pre>
+  <div class="button-group">
+    <button class="btn " (click)="geri()">Giriş Ekranına Dön</button>
+    <button class="btn " (click)="anaSayfa()">Ana Sayfaya Dön</button>
+  </div>
+</div>
+<ng-template #loading>
+  <div>Yükleniyor...</div>
+</ng-template>
